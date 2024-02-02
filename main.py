@@ -4,6 +4,8 @@ import re
 import time
 import os
 from datetime import datetime, timedelta
+import pandas as pd
+# import pyarrow
 
 
 # 用来把英文和数字翻译成中文存到文件名里。也许还有别的用途。
@@ -15,7 +17,10 @@ translation_table = {
     'country': '国家',
     'province': '省',
     'city': '市',
-    # 如果你有其他省市数据需要获取，请修改下面
+    'move_in': '迁入',
+    'move_out': '迁出',
+
+    # 如果你有其他省市数据需要获取，请修改这里
     '360000': '江西省',
     '360100': '南昌市',
     '360700': '赣州市',
@@ -28,8 +33,6 @@ translation_table = {
     '360300': '萍乡市',
     '360500': '新余市',
     '360600': '鹰潭市',
-    'move_in': '迁入',
-    'move_out': '迁出',
 }
 
 
@@ -199,6 +202,16 @@ def download_and_convert_jsonp(data_type: str, dt: str, id: str, move_type: str,
         # Decode JSON string, automatically handling Unicode characters
         json_data = json.loads(json_data_str)
 
+        # 如果要导出 CSV 文件，可以在这里操作json_data。可以修改下面的代码：
+        # if json_data['errmsg'] == 'SUCCESS':
+        #     data = json_data['data']['list']
+        #     file = pd.DataFrame({id: data}).T
+        #     csv_filename = f'./data/{translation_table[id]}_' \
+        #                    f'{translation_table[move_type]}_' \
+        #                    f'{translation_table[data_type]}_' \
+        #                    f'{date}.csv'
+        #     file.to_csv(csv_filename, encoding='utf-8')
+
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(json_data, f, ensure_ascii=False, indent=2)
 
@@ -262,6 +275,7 @@ def get_by_date(from_date, to_date, lastdate):
             for move_type in Types.move_type:
                 for data_type in Types.data_type:
                     get_data(region, data_type, move_type, date)
+    print("完成")
 
 
 if __name__ == "__main__":
@@ -271,4 +285,4 @@ if __name__ == "__main__":
         os.makedirs('data')
     lastdate = get_lastdate()  # 接口给到的最晚日期
     # 如果你需要修改起始和结束日期，请修改这里
-    get_by_date('20230101', '20240131', lastdate)
+    get_by_date('20240131', '20240131', lastdate)
