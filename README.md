@@ -16,6 +16,8 @@ http://huiyan.baidu.com/migration/cityrank.jsonp?dt=province&id=330000&type=move
 
 ## 参数
 
+请参考`main.py`中的注释。以下给出简要说明：
+
 ### dt
 
 dt是级别。可选的值有：country，province，city。
@@ -41,3 +43,9 @@ callback是一个时间戳，他调取的时候格式为：`jsonp_X_Y`，其中X
 ## 代码
 
 运行`main.py`，只需要修改所有标记了“请修改这里”的地方为你所需要的数据即可。所有爬到的 json 数据会保存在`./data/`下面。如果需要改为其他的格式（如 csv），可以在代码中操作 json_data。
+
+## Star History
+
+如果您觉得有用，请点一个 Star！
+
+[![Star History Chart](https://api.star-history.com/svg?repos=baisebaoma/baiduqianxi&type=Date)](https://star-history.com/#baisebaoma/baiduqianxi&Date)
