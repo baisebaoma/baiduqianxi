@@ -12,37 +12,29 @@
 
 http://huiyan.baidu.com/migration/cityrank.jsonp?dt=province&id=330000&type=move_in&callback=jsonp_1581412681419_9173670
 
-接口一共有4个：cityrank、provincerank、lastdate、historycurve。其中 historycurve 比较特殊，直接返回历史上所有日期的数据。
+其中 `cityrank`（`/migration/` 后、`.jsonp` 前） 处的可选项一共有四个：`cityrank`、`provincerank`、`lastdate`、`historycurve`。其中 `historycurve` 比较特殊，直接返回历史上所有日期的数据。
 
 ## 参数
 
-请参考`main.py`中的注释。以下给出简要说明：
+请参考 `main.py` 中的注释。以下给出简要说明：
 
-### dt
+`dt`：级别。可选的值有：`country`、`province`、`city`。
 
-dt是级别。可选的值有：country、province、city。
+`id`：六位数，代表区域（可以是省，也可以是市），如：360100。如果是 dt 是 country，不需要给这个参数。
 
-### id
+`type`: `move_in`, `move_out` 分别代表迁入迁出数据。
 
-六位数，代表区域（可以是省，也可以是市），如：360100。如果是 dt 是 country，不需要给这个参数。
+`date`: 长度为8、格式为年月日的日期，如：`20240130`。如果接口是 `historycurve`，不需要给这个参数。
 
-### type
-
-move_in, move_out 分别代表迁入迁出数据。
-
-### date
-
-长度为8、格式为年月日的日期，如：20240130。如果接口是 historycurve，不需要给这个参数。
-
-### callback
-
-callback是一个时间戳，他调取的时候格式为：`jsonp_X_Y`，其中X经实验为13位的毫秒级时间戳，Y是7位数字，未发现明显规律（估计也是时间）。
-
-爬取的时候，甚至不需要填写这个。它只是代表“我给你返回的数据确实是你这次获取的数据”。
+`callback`: 时间戳，他调取的时候格式为：`jsonp_X_Y`，其中 X 经实验为 13 位的毫秒级时间戳，Y是7位数字，估计是更精确的时间。爬取的时候甚至不需要填写这个。它只是代表“我给你返回的数据确实是你这次获取的数据”。
 
 ## 代码
 
-运行`main.py`，只需要修改所有标记了“请修改这里”的地方为你所需要的数据即可。所有爬到的 json 数据会保存在`./data/`下面。如果需要改为其他的格式（如 csv），可以在代码中操作 json_data。
+运行`main.py`，查找“请修改这里”，并修改这些地方为你所需要的数据即可。所有爬到的 json 数据会保存在`./data/`下面。如果需要改为其他的格式（如 `csv`），可以在代码中操作 `json_data`。
+
+## 已知问题
+
+1. 经反馈，由于当前版本的保存的目标路径是写死的（`./data/`），如果使用 Pytorch 等特殊环境可能会很难找到最后生成的文件到底在哪里。之后有时间可能会将这些改成一个变量方便修改。
 
 ## 遇到了问题……
 
