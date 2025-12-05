@@ -4,11 +4,13 @@
 
 2024.12.6 对代码进行了测试，似乎仍有效。
 
+2025.12.5 对接口进行了测试，似乎仍有效。注意接口最早的日期是 2019 年 1 月 12 日，不过这个时间之后的部分数据可能也是缺失的。
+
 **注：似乎部分日期的部分数据缺失。如果不幸通过本仓库的方法获取到的数据中，您需要的日期刚好没有数据，也许可以尝试直接联系百度迁徙获得……**
 
 ## 接口
 
-以下面的接口为例。
+以下面的接口为例（似乎添加了除以下列出的以外的新的接口。请自行尝试！）。
 
 http://huiyan.baidu.com/migration/cityrank.jsonp?dt=province&id=330000&type=move_in&callback=jsonp_1581412681419_9173670
 
@@ -30,7 +32,7 @@ http://huiyan.baidu.com/migration/cityrank.jsonp?dt=province&id=330000&type=move
 
 ## 代码
 
-运行`main.py`，查找“请修改这里”，并修改这些地方为你所需要的数据即可。所有爬到的 json 数据会保存在`./data/`下面。如果需要改为其他的格式（如 `csv`），可以在代码中操作 `json_data`。
+配置好环境，运行`main.py`，查找“请修改这里”，并修改这些地方为你所需要的数据即可。所有爬到的 json 数据会保存在`./data/`下面。如果需要改为其他的格式（如 `csv`），可以在代码中操作 `json_data`。
 
 ## 已知问题
 
@@ -38,7 +40,7 @@ http://huiyan.baidu.com/migration/cityrank.jsonp?dt=province&id=330000&type=move
 
 ## 遇到了问题……
 
-可以提 [Issue](https://github.com/baisebaoma/baiduqianxi/issues) 或 [发送邮件](mailto:baisebaoma@foxmail.com) 联系我。我更建议您提 Issue，这样其他人也可以看到并参与讨论您的问题！
+可以提 [Issue](https://github.com/baisebaoma/baiduqianxi/issues) 或 [发送邮件](mailto:baisebaoma@foxmail.com) 联系我。我更建议您提 Issue，这样其他人也可以看到并参与讨论您的问题（并且这样做也会同时给我发邮件）！
 
 ## Star History
 
