@@ -1,5 +1,7 @@
 # 百度迁徙平台数据获取
 
+[English brief description](#english)
+
 [百度迁徙平台](http://qianxi.baidu.com/#/)（百度慧眼）几乎是日前最具有参考价值的中国人口迁徙数据，许多论文以此为数据基础。但在其官网上既没有展示**所有的**数据，也没有提他们有公开的接口，只有一句“获取详情数据请点击[联系我们](https://huiyan.baidu.com/contact?article=qianxi)”。实际上除了没有给出公开的文档以外，百度迁徙平台不仅留了免费的接口，还能获取**几乎所有的**数据。~~感觉百度的意思就是：你有能力爬，我们愿意把数据给你；你没能力爬，那就花钱找我们要。~~ 2024 年初（本仓库创立之时） GitHub 上没有仍然在更新的、满足相同需求的代码，我们尝试抛砖引玉补齐这些，并整理好信息为后来人提供帮助。
 
 查看本 API 提供的参考数据请见[更新日志](#更新日志)！
@@ -34,9 +36,13 @@ http://huiyan.baidu.com/migration/cityrank.jsonp?dt=province&id=330000&type=move
 
 因为这份代码是两年之前手工写的了，可能现在看起来有点简陋，所以您可能可以让一个大语言模型阅读过之后再撰写代码来获取数据。可以考虑把本文档（也就是 `README.md`）也喂给它，方便它理解。毕竟现在已经是 AI Coding 的时代了！
 
-## 已知问题
+### 已知问题
 
 1. 经反馈，由于当前版本的保存的目标路径是写死的（`./data/`），如果使用 Pytorch、Jupyter Notebook 等特殊环境可能会很难找到最后生成的文件到底在哪里。之后有时间可能会将这些改成一个变量方便修改。
+
+2. 这份代码使用的是单线程遍历的做法，如果您需要获取大量数据，可能是非常耗时间的。所以我建议您在指挥大模型的时候，要求它写一个多线程。我给出的一个典型的提示词例子是（是的，我近年几乎都没有自己亲自写代码，都是让大语言模型帮我完成的）：
+
+> 扮演 Python 专家。请阅读这份代码和 README.md。请基于这些代码创建一个新的现代的完整的代码，获取[从某个时间段]到[某个时间段]的某个城市的迁入迁出数据……我需要的接口有……请使用多线程的方式完成。请加入错误处理。……你可能需要首先理解这个 API 的工作方式，并且实验是否当前它工作正常。先不要生成代码，与我讨论你的计划，我同意之后，你再开始写代码。准备好就开始。
 
 ## 遇到了问题……
 
@@ -84,4 +90,30 @@ http://huiyan.baidu.com/migration/cityrank.jsonp?dt=province&id=330000&type=move
 
 [![Star History Chart](https://api.star-history.com/svg?repos=baisebaoma/baiduqianxi&type=Date)](https://star-history.com/#baisebaoma/baiduqianxi&Date)
 
+# English
+
+Baidu Migration Data Scraper (Scraping Tool for baidu.qianxi)
+
+This repository provides a streamlined way to access population migration data from the [Baidu Migration Platform](http://qianxi.baidu.com/#/). While Baidu does not provide official documentation for their APIs, this project uncovers the underlying interfaces used by the platform to facilitate academic research, urban planning, and epidemic modeling.
+
+## Features
+* **Comprehensive Data:** Access move-in/move-out rankings (at both city and province levels) and historical migration index curves.
+* **Research-Friendly:** Simplifies the collection of large-scale Spatio-temporal (时空的) data for professional studies.
+* **AI-Native Ready:** The codebase and documentation are optimized to be easily understood and extended by LLMs (like GPT-4o, Gemini, or Claude) for customized scraping tasks.
+
+## API Overview
+The core endpoint is `http://huiyan.baidu.com/migration/{interface}.jsonp`.
+* `cityrank`: Ranking of origin/destination cities.
+* `provincerank`: Ranking of origin/destination provinces.
+* `historycurve`: Historical daily migration index.
+
+## Quick Start
+1.  Configure the `main.py` with your target `id` (Area Code) and `date`.
+2.  Run the script to save raw JSON data to `./data/`.
+3.  **Encoding Note:** Unicode characters like `\u91cd\u5e86` represent Chinese city names (e.g., Chongqing). You may need to decode them using `unicode_escape` in Python.
+
+## Communication
+If you have any questions or encounter issues, please feel free to open an **Issue** or contact me via [Email](mailto:baisebaoma@foxmail.com). 
+
+**I am comfortable with both English and Chinese (Mandarin/Cantonese) communication.**
 
