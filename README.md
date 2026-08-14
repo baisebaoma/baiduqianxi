@@ -1,3 +1,5 @@
+
+
 # 百度迁徙平台数据获取
 
 [English brief description](#english)
@@ -22,7 +24,7 @@ http://huiyan.baidu.com/migration/cityrank.jsonp?dt=province&id=330000&type=move
 
 `dt`：级别。可选的值有：`country`、`province`、`city`。
 
-`id`：六位数，代表区域（可以是省，也可以是市），如：360100。如果是 dt 是 country，不需要给这个参数。
+`id`：六位数，代表区域（可以是省，也可以是市），如：360100。如果是 dt 是 country，不需要给这个参数。**如需获取其他省市数据，请在 `main.py` 的 `translation_table` 和 `Types.region` 字典中补充对应的行政区划编码。**
 
 `type`: `move_in`, `move_out` 分别代表迁入迁出数据。
 
@@ -116,4 +118,3 @@ The core endpoint is `http://huiyan.baidu.com/migration/{interface}.jsonp`.
 If you have any questions or encounter issues, please feel free to open an **Issue** or contact me via [Email](mailto:baisebaoma@foxmail.com). 
 
 **I am comfortable with both English and Chinese (Mandarin/Cantonese) communication.**
-
